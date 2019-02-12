@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<v-sheet
+          class="d-flex"
+          color="grey lighten-3"
+          height="100%"
+          width="100%"
+        >
+          <case-map></case-map>
+        </v-sheet>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import CaseMap from '@/components/CaseMap.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    CaseMap
   }
 }
 </script>

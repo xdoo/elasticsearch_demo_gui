@@ -1,13 +1,28 @@
 <template>
-  <l-map ref="myMap"></l-map>
+  <div style="height: 100%; width: 100%; margin: 0">
+    <l-map :zoom="zoom" :center="center">
+      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+    </l-map>
+  </div>
 </template>
 <script>
+//import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet';
+import { L, LMap, LTileLayer } from 'vue2-leaflet';
+
 export default {
-  mounted () {
-      this.$nextTick(() => {
-        this.$refs.myMap.mapObject.ANY_LEAFLET_MAP_METHOD();
-      })
+  components: {
+    LMap,
+    LTileLayer
+  },
+  data () {
+    return {
+      zoom: 12,
+      url:'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
+      attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      center: L.latLng(48.1371181, 11.5755711)
     }
+  }
 }
 </script>
+
 

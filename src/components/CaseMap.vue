@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; width: 100%; margin: 0">
-    <l-map :zoom="zoom" :center="center">
+    <l-map :zoom="zoom" :center="center" style="z-index: 1">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     </l-map>
   </div>

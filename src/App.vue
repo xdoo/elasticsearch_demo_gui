@@ -73,7 +73,7 @@
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down"><b>Search</b> Demo</span>
+        <span class="hidden-sm-and-down">Search <span class="font-weight-light">Demo</span></span>
       </v-toolbar-title>
       <v-text-field
         flat

@@ -7,12 +7,13 @@
 </template>
 <script>
 //import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet';
-import { L, LMap, LTileLayer } from 'vue2-leaflet';
+import { L, LMap, LTileLayer, LPopup } from 'vue2-leaflet';
 
 export default {
   components: {
     LMap,
-    LTileLayer
+    LTileLayer,
+    LPopup
   },
   data () {
     return {

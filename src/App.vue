@@ -79,6 +79,9 @@
         flat
         solo-inverted
         hide-details
+        @keyup="keymonitor"
+        clearable
+        v-model="query"
         prepend-inner-icon="search"
         label="Search"
         class="hidden-sm-and-down"
@@ -190,6 +193,7 @@
 <script>
   export default {
     data: () => ({
+      query: '',
       dialog: false,
       drawer: null,
       items: [
@@ -227,6 +231,11 @@
     }),
     props: {
       source: String
+    },
+    methods: {
+      keymonitor (event) {
+      this.pushquery(this.query)
+    },
     }
   }
 </script>

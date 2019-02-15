@@ -7,7 +7,8 @@
 </template>
 <script>
 //import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet';
-import { L, LMap, LTileLayer, LPopup } from 'vue2-leaflet';
+import { L, LMap, LTileLayer, LPopup } from 'vue2-leaflet'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -22,6 +23,9 @@ export default {
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       center: L.latLng(48.1371181, 11.5755711)
     }
+  },
+  computed: {
+    ...mapGetters(['query'])
   }
 }
 </script>

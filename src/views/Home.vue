@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import CaseMap from '@/components/CaseMap.vue'
 
 export default {

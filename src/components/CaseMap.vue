@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-//import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet';
 import { L } from 'vue2-leaflet'
 import { mapGetters } from 'vuex'
 
@@ -26,15 +25,19 @@ export default {
       zoom: 12,
       url:'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      center: L.latLng(48.1371181, 11.5755711),
-      hits: [],
-      marker: L.latLng(48.12484573, 11.5256366)
+      center: L.latLng(48.1371181, 11.5755711), // Marienplatz
+      hits: []
     }
   },
   computed: {
     ...mapGetters(['query'])
   },
   methods: {
+    /**
+     * 'lon' ist der Standard Elasticsearch Wert. Dieser
+     * führt zu Fehlermeldungen. Deshalb wird die Elasticsearch
+     * Struktur zu einem Array umgeandelt. 
+     */
     formatLatLng (hit) {
       return [
         hit._source.address.location.lat,
@@ -42,9 +45,12 @@ export default {
       ]
     }
   },
+  /**
+   * Veränderungen im Suchfeld werden hier überwacht. Jede
+   * Eingabe erzeugt eine neue Suchanfrage. 
+   */
   watch: {
     query: function (val) {
-      console.log('Wert: ' + val)
       this.$search.search({
         index: 'cases',
         body: {
@@ -59,7 +65,6 @@ export default {
       })
       .then(result => {
         this.hits = result.hits.hits
-        //console.log('hits -> ' + JSON.stringify(this.hits))
       })
     }
   }

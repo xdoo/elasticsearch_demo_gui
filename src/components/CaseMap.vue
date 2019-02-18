@@ -8,13 +8,14 @@
         :lat-lng="formatLatLng(hit)">
         <l-popup>
           <div>
-            <span class="subheading">{{hit._source.owner.firstname}} {{hit._source.owner.lastname}}</span>
-            <p>
+            <span class="subheading">{{hit._source.owner.firstname}} {{hit._source.owner.lastname}} ({{hit._source.advisor.shorthandSymbol}})</span>
+            <br>
+            <span>
               {{hit._source.address.street}} {{hit._source.address.streetNumber}}<br>
               {{hit._source.address.sublocality}}<br>
               {{hit._source.address.postalCode}} {{hit._source.address.city}}<br>
-              <br>
-            </p>
+            </span>
+            <v-btn flat right small color="primary">Öffnen</v-btn>
           </div>
         </l-popup>
       </l-marker>

@@ -191,6 +191,8 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data: () => ({
       query: '',
@@ -233,9 +235,10 @@
       source: String
     },
     methods: {
-      keymonitor (event) {
-      this.pushquery(this.query)
-    },
+      ...mapActions(['pushquery']),
+      keymonitor () {
+        this.pushquery(this.query)
+      },
     }
   }
 </script>

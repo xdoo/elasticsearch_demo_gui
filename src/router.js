@@ -5,6 +5,7 @@ import NotFound from '@/views/NotFound'
 
 const routerOptions = [
   { path: '/', component: 'Map' },
+  { path: '/dashboard', component: 'Dashboard' },
 ]
 
 const routes = routerOptions.map(route => {

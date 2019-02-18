@@ -8,7 +8,13 @@
         :lat-lng="formatLatLng(hit)">
         <l-popup>
           <div>
-            I am a popup
+            <span class="subheading">{{hit._source.owner.firstname}} {{hit._source.owner.lastname}}</span>
+            <p>
+              {{hit._source.address.street}} {{hit._source.address.streetNumber}}<br>
+              {{hit._source.address.sublocality}}<br>
+              {{hit._source.address.postalCode}} {{hit._source.address.city}}<br>
+              <br>
+            </p>
           </div>
         </l-popup>
       </l-marker>
@@ -51,14 +57,17 @@ export default {
    */
   watch: {
     query: function (val) {
+      // wildcard search
+      let query = val.replace(' ', '* ')
+      query = query + '*'
       this.$search.search({
         index: 'cases',
         body: {
           query: {
-            multi_match: {
-              query: val,
-              type: 'phrase_prefix',
-              fields: ['owner.firstname^2', 'owner.lastname^3', 'address.street^2', 'address.postalcode', 'address.sublocality']
+            query_string: {
+              query: query,
+              default_operator: 'AND',
+              fields: ['owner.firstname^2', 'owner.lastname^3', 'address.street^2', 'address.postalcode', 'address.sublocality', 'advisor.shorthandSymbol']
             }
           }
         }

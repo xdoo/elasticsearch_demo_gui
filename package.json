@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "^3.4.93",
     "axios": "^0.18.0",
     "elasticsearch": "^15.4.1",
     "leaflet": "^1.4.0",

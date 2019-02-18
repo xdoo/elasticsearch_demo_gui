@@ -51,7 +51,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else :key="item.text">
+          <v-list-tile v-else :key="item.text" :to="item.to">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -199,7 +199,7 @@
       dialog: false,
       drawer: null,
       items: [
-        { icon: 'contacts', text: 'Contacts' },
+        { icon: 'mdi-map-search', text: 'Geosuche', to: '/' },
         { icon: 'history', text: 'Frequently contacted' },
         { icon: 'content_copy', text: 'Duplicates' },
         {

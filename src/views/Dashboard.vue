@@ -9,12 +9,7 @@
   </v-sheet>
 </template>
 <script>
-import VueFrame from 'vue-frame'
-
 export default {
-  name: 'dashboard',
-  components: { 
-    VueFrame 
-  }  
+  name: 'dashboard' 
 }
 </script>

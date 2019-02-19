@@ -1,6 +1,39 @@
 <template>
  <v-app id="inspire">
     <v-navigation-drawer
+      v-model="drawerR"
+      clipped
+      absolute
+      right
+    > 
+      <v-layout row wrap>
+        <v-flex xs12>
+          <div class="pt-5 mt-5 ml-3">
+            <span class="display-1 font-weight-light">Fälle in Bearbeitung</span>
+          </div>
+        </v-flex>
+        <v-flex xs12>
+          <v-list dense two-line class="pt-2">
+            <v-list-tile 
+              avatar
+              @click="open()">
+              <v-list-tile-content>
+                <v-list-tile-title>Michael Hickman (DMU)</v-list-tile-title>
+                <v-list-tile-sub-title>Werdenfelsstraße 57, 81377 München (Sendling-Westpark)</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile avatar @click="open()">
+              <v-list-tile-content>
+                <v-list-tile-title>Jeremy Franklin (PME)</v-list-tile-title>
+                <v-list-tile-sub-title>Urbanstraße 22, 81371 München (Sendling)</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-flex>
+      </v-layout>      
+    </v-navigation-drawer>
+    <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       fixed
@@ -90,8 +123,19 @@
       <v-btn icon>
         <v-icon>apps</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>notifications</v-icon>
+      <v-btn 
+        icon 
+        color="red"
+        v-if="parked > 0"
+        @click.stop="closeR()">
+        {{ parked }}
+      </v-btn>
+      <v-btn
+        v-if="parked === 0"
+        @click.stop="drawerR = !drawerR" 
+        icon
+      >
+        <v-icon @click.stop="drawerR = !drawerR">mdi-timelapse</v-icon>
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" tile>
@@ -196,8 +240,10 @@
   export default {
     data: () => ({
       query: '',
+      parked: 2,
       dialog: false,
       drawer: null,
+      drawerR: null,
       items: [
         { icon: 'mdi-map-search', text: 'Geosuche', to: '/' },
         { icon: 'history', text: 'Listensuche' },
@@ -212,6 +258,13 @@
       keymonitor () {
         this.pushquery(this.query)
       },
+      open () {
+        console.log('pressed open...')
+      },
+      closeR () {
+        this.drawerR = !this.drawerR
+        this.parked = 0
+      }
     }
   }
 </script>

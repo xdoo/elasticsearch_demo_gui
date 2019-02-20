@@ -54,14 +54,8 @@ export default {
         hit._source.address.location.lat,
         hit._source.address.location.lon
       ]
-    }
-  },
-  /**
-   * Veränderungen im Suchfeld werden hier überwacht. Jede
-   * Eingabe erzeugt eine neue Suchanfrage. 
-   */
-  watch: {
-    query: function (val) {
+    },
+    search (val) {
       // es wird erst ab 2 Buchstaben gesucht
       if (val.length > 2) {
         // wildcard search
@@ -82,8 +76,24 @@ export default {
         .then(result => {
           this.hits = result.hits.hits
         })
-      }
+      } // end search
     }
+  },
+  /**
+   * Veränderungen im Suchfeld werden hier überwacht. Jede
+   * Eingabe erzeugt eine neue Suchanfrage. 
+   */
+  watch: {
+    query: function (val) {
+      this.search(val)
+    }
+  },
+  /**
+   * Damit bei einem Wechsel der Ansicht das selbe Trefferbild stehen bleibt,
+   * muss die Suche initial nochmal ausgeführt werden.
+   */
+  created: function () {
+    this.search(this.query)
   }
 }
 </script>

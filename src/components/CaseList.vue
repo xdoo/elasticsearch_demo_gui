@@ -65,7 +65,6 @@ export default {
      * muss die Suche initial nochmal ausgeführt werden.
      */
     created: function () {
-      console.log('created')
       this.search(this.query)
     },
     methods: {
@@ -73,7 +72,6 @@ export default {
        * Suche wird ausgeführt.
        */
       search (val) {
-        console.log(val)
         // es wird erst ab 2 Buchstaben gesucht
         if (val.length > 2) {
           // wildcard search

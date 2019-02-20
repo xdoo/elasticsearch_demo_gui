@@ -5,27 +5,19 @@
       class="pa-0"
     >
       <case-map></case-map>
-      <v-btn
-        fab
-        bottom
-        right
-        color="pink"
-        dark
-        fixed
-        @click="createNew()"
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
+      <add-case-button></add-case-button>
     </v-container>   
 </template>
 
 <script>
 import CaseMap from '@/components/CaseMap.vue'
+import AddCaseButton from '@/components/AddCaseButton'
 
 export default {
   name: 'mapView',
   components: {
-    CaseMap
+    CaseMap,
+    AddCaseButton
   },
   methods: {
     createNew () {

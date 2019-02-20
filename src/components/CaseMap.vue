@@ -64,6 +64,8 @@ export default {
         this.$search.search({
           index: 'cases',
           body: {
+            from: 0,
+            size: 30,
             query: {
               query_string: {
                 query: query,

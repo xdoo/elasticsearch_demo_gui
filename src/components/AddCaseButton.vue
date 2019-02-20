@@ -1,0 +1,63 @@
+<template>
+  <v-speed-dial
+      direction="top"
+      bottom
+      right
+      fixed
+  >
+    <v-btn
+      slot="activator"
+      fab
+      color="pink"
+      dark
+    >
+      <v-icon>add</v-icon>
+      <v-icon>close</v-icon>
+    </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="primary"
+      >
+        ZE
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="primary"
+      >
+        EH
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="primary"
+      >
+        §5
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="primary"
+      >
+        WO
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="grey lighten-1"
+      >
+        <v-icon>mdi-dots-horizontal</v-icon>
+      </v-btn>
+  </v-speed-dial>
+</template>
+<script>
+export default {
+    
+}
+</script>

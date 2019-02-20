@@ -1,9 +1,8 @@
 <template>
-    <v-sheet
-      class="d-flex"
-      color="grey lighten-3"
-      height="100%"
-      width="100%"
+    <v-container
+      fluid
+      fill-height
+      class="pa-0"
     >
       <case-map></case-map>
       <v-btn
@@ -17,14 +16,14 @@
       >
         <v-icon>add</v-icon>
       </v-btn>
-    </v-sheet>   
+    </v-container>   
 </template>
 
 <script>
 import CaseMap from '@/components/CaseMap.vue'
 
 export default {
-  name: 'home',
+  name: 'mapView',
   components: {
     CaseMap
   },

@@ -150,9 +150,10 @@
       CONTENT START
      -->
     <v-content>
-      <v-container fluid fill-height class="pa-0">
+      <!-- <v-container fluid align-start fill-height class="pa-0"> -->
+      <!-- <v-container fluid class="pa-0"> -->
         <router-view/>
-      </v-container>
+      <!-- </v-container> -->
     </v-content>
     <!--
       CONTENT END
@@ -171,8 +172,8 @@
       drawer: null,
       drawerR: null,
       items: [
-        { icon: 'mdi-map-search', text: 'Geosuche', to: '/' },
-        { icon: 'history', text: 'Listensuche' },
+        { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
+        { icon: 'history', text: 'Listenanzeige', to: '/listview' },
         { icon: 'mdi-chart-donut-variant', text: 'Dashboard', to: '/dashboard' }
       ]
     }),

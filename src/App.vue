@@ -1,37 +1,12 @@
 <template>
  <v-app id="inspire">
     <v-navigation-drawer
-      v-model="drawerR"
+      v-model="drawerParking"
       clipped
       absolute
       right
     > 
-      <v-layout row wrap>
-        <v-flex xs12>
-          <div class="pt-5 mt-5 ml-3">
-            <span class="display-1 font-weight-light">Fälle in Bearbeitung</span>
-          </div>
-        </v-flex>
-        <v-flex xs12>
-          <v-list dense two-line class="pt-2">
-            <v-list-tile 
-              avatar
-              @click="open()">
-              <v-list-tile-content>
-                <v-list-tile-title>Michael Hickman (DMU)</v-list-tile-title>
-                <v-list-tile-sub-title>Werdenfelsstraße 57, 81377 München (Sendling-Westpark)</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile avatar @click="open()">
-              <v-list-tile-content>
-                <v-list-tile-title>Jeremy Franklin (PME)</v-list-tile-title>
-                <v-list-tile-sub-title>Urbanstraße 22, 81371 München (Sendling)</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-flex>
-      </v-layout>      
+      <parking-drawer></parking-drawer>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="drawer"
@@ -130,7 +105,7 @@
       >
         <span slot="badge">{{ parked }}</span>
         <v-btn
-          @click.stop="drawerR = !drawerR" 
+          @click.stop="drawerParking = !drawerParking" 
           icon
           class="ma-0"
         >
@@ -158,17 +133,21 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import ParkingDrawer from '@/components/ParkingDrawer'
 
   export default {
+    components: {
+      ParkingDrawer
+    },
     data: () => ({
       query: '',
       parked: 2,
       dialog: false,
       drawer: null,
-      drawerR: false,
+      drawerParking: false,
       items: [
         { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
-        { icon: 'history', text: 'Listenanzeige', to: '/listview' },
+        { icon: 'mdi-table-search', text: 'Textanzeige', to: '/listview' },
         { icon: 'mdi-chart-donut-variant', text: 'Dashboard', to: '/dashboard' }
       ]
     }),

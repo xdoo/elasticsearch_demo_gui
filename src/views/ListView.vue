@@ -1,35 +1,27 @@
 <template>
-      <v-container grid-list-sm>
-        <v-layout align-start justify-start row wrap>
-          <v-flex xs12>
-            <v-card dark color="primary">
-              <v-card-text>one</v-card-text>
-            </v-card>
-          </v-flex>
-          <v-flex xs12>
-            <v-card dark color="primary">
-              <v-card-text>one</v-card-text>
-            </v-card>
-          </v-flex>
-          <v-flex xs12>
-            <v-card dark color="primary">
-              <v-card-text>one</v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
+  <div>
+    <v-toolbar
+      flat
+      color="transparent"
+    >
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon color="primary">mdi-apps</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon color="primary">mdi-view-list</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <case-list></case-list>
+  </div>
 </template>
 <script>
+import CaseList from '@/components/CaseList'
+
 export default {
-  name: 'ListView',
-  computed: {
-      binding () {
-        const binding = {}
-
-        if (this.$vuetify.breakpoint.mdAndUp) binding.column = true
-
-        return binding
-      }
-    } 
+  components: {
+    CaseList
+  },
+  name: 'ListView'
 }
 </script>

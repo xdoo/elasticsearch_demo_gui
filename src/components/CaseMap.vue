@@ -58,24 +58,27 @@ export default {
    */
   watch: {
     query: function (val) {
-      // wildcard search
-      let query = val.replace(' ', '* ')
-      query = query + '*'
-      this.$search.search({
-        index: 'cases',
-        body: {
-          query: {
-            query_string: {
-              query: query,
-              default_operator: 'AND',
-              fields: ['owner.firstname^2', 'owner.lastname^3', 'address.street^2', 'address.postalcode', 'address.sublocality', 'advisor.shorthandSymbol']
+      // es wird erst ab 2 Buchstaben gesucht
+      if (val.length > 2) {
+        // wildcard search
+        let query = val.replace(' ', '* ')
+        query = query + '*'
+        this.$search.search({
+          index: 'cases',
+          body: {
+            query: {
+              query_string: {
+                query: query,
+                default_operator: 'AND',
+                fields: ['owner.firstname^2', 'owner.lastname^3', 'address.street^2', 'address.postalcode', 'address.sublocality', 'advisor.shorthandSymbol']
+              }
             }
           }
-        }
-      })
-      .then(result => {
-        this.hits = result.hits.hits
-      })
+        })
+        .then(result => {
+          this.hits = result.hits.hits
+        })
+      }
     }
   }
 }

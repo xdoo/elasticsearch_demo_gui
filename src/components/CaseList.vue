@@ -30,7 +30,7 @@
         <v-flex
           v-if="hits.length < 1"
         >
-          <div class="title font-weight-light">Keine Treffer zu Ihrer Suchanfrage.</div>
+          <div class="title font-weight-light text-md-center">Keine Treffer zu Ihrer Suchanfrage.</div>
         </v-flex>
       </v-layout>
     </v-container>  
@@ -51,25 +51,29 @@ export default {
     computed: {
       ...mapGetters(['query'])
     },
-    methods: {
-      /**
-       * 'lon' ist der Standard Elasticsearch Wert. Dieser
-       * führt zu Fehlermeldungen. Deshalb wird die Elasticsearch
-       * Struktur zu einem Array umgeandelt. 
-       */
-      formatLatLng (hit) {
-        return [
-          hit._source.address.location.lat,
-          hit._source.address.location.lon
-        ]
-      }
-    },
     /**
      * Veränderungen im Suchfeld werden hier überwacht. Jede
      * Eingabe erzeugt eine neue Suchanfrage. 
      */
     watch: {
       query: function (val) {
+        this.search(val)    
+      }
+    },
+    /**
+     * Damit bei einem Wechsel der Ansicht das selbe Trefferbild stehen bleibt,
+     * muss die Suche initial nochmal ausgeführt werden.
+     */
+    created: function () {
+      console.log('created')
+      this.search(this.query)
+    },
+    methods: {
+      /**
+       * Suche wird ausgeführt.
+       */
+      search (val) {
+        console.log(val)
         // es wird erst ab 2 Buchstaben gesucht
         if (val.length > 2) {
           // wildcard search
@@ -77,8 +81,10 @@ export default {
           query = query + '*'
           this.$search.search({
             index: 'cases',
-            body: {
-              query: {
+              body: {
+                from: 0,
+                size: 30,
+                query: {
                 query_string: {
                   query: query,
                   default_operator: 'AND',
@@ -86,12 +92,12 @@ export default {
                 }
               }
             }
-          })
-          .then(result => {
-            this.hits = result.hits.hits
-          })
-        }
+            })
+            .then(result => {
+              this.hits = result.hits.hits
+            })
+          }
       }
-    } 
+    }
 }
 </script>

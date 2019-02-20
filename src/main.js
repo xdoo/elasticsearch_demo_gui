@@ -15,7 +15,7 @@ Vue.prototype.$http = axios
 
 Vue.prototype.$search = new es.Client({
   host: 'localhost:9200',
-  log: 'trace'
+  log: 'error'
 })
 
 Vue.component('l-map', LMap)

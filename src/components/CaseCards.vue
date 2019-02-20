@@ -39,6 +39,11 @@
           </v-card-actions>
         </v-card>
       </v-flex>
+      <v-flex
+        v-if="hits.length < 1"
+      >
+        <div class="title font-weight-light text-md-center">Keine Treffer zu Ihrer Suchanfrage.</div>
+      </v-flex>
     </v-layout>
   </v-container>    
 </template>
@@ -81,6 +86,8 @@ export default {
         this.$search.search({
           index: 'cases',
             body: {
+              from: 0,
+              size: 30,
               query: {
                query_string: {
                  query: query,
@@ -110,6 +117,7 @@ export default {
    * muss die Suche initial nochmal ausgeführt werden.
    */
   created: function () {
+    console.log('created')
     this.search(this.query)
   } 
 }

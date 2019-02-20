@@ -15,7 +15,7 @@
               {{hit._source.address.sublocality}}<br>
               {{hit._source.address.postalCode}} {{hit._source.address.city}}<br>
             </span>
-            <v-btn flat right small color="primary">Öffnen</v-btn>
+            <v-spacer></v-spacer><case-actions :case-id="hit._id"></case-actions>
           </div>
         </l-popup>
       </l-marker>
@@ -25,8 +25,12 @@
 <script>
 import { L } from 'vue2-leaflet'
 import { mapGetters } from 'vuex'
+import CaseActions from '@/components/CaseActions'
 
 export default {
+  components: {
+    CaseActions
+  },
   data () {
     return {
       zoom: 12,

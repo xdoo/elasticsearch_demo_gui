@@ -35,15 +35,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>mdi-folder-open</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>mdi-timelapse</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
+            <case-actions :case-id="hit._id"></case-actions>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -52,8 +44,12 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import CaseActions from '@/components/CaseActions'
 
 export default {
+  components: {
+    CaseActions
+  },
   data () {
     return {
       hits: []

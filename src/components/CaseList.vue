@@ -4,7 +4,8 @@
         <v-flex 
           xs12 
           v-for="hit in hits"
-          v-bind:key="hit._id" >
+          v-bind:key="hit._id" 
+        >
           <v-card
             flat
           >

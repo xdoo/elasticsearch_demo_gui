@@ -121,29 +121,24 @@
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn icon>
-        <v-icon>apps</v-icon>
+        <v-icon>mdi-chat-alert</v-icon>
       </v-btn>
-      <v-btn 
-        icon 
-        color="red"
-        v-if="parked > 0"
-        @click.stop="closeR()">
-        {{ parked }}
-      </v-btn>
-      <v-btn
-        v-if="parked === 0"
-        @click.stop="drawerR = !drawerR" 
-        icon
+      <v-badge
+        color="accent"
+        left
+        overlap
       >
-        <v-icon @click.stop="drawerR = !drawerR">mdi-timelapse</v-icon>
-      </v-btn>
+        <span slot="badge">{{ parked }}</span>
+        <v-btn
+          @click.stop="drawerR = !drawerR" 
+          icon
+          class="ma-0"
+        >
+          <v-icon>mdi-timelapse</v-icon>
+        </v-btn>
+      </v-badge>
       <v-btn icon large>
-        <v-avatar size="32px" tile>
-          <img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          >
-        </v-avatar>
+        <v-icon large>mdi-account-circle</v-icon>
       </v-btn>
     </v-toolbar>
     <!--

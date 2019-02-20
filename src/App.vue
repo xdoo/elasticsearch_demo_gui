@@ -165,7 +165,7 @@
       parked: 2,
       dialog: false,
       drawer: null,
-      drawerR: null,
+      drawerR: false,
       items: [
         { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
         { icon: 'history', text: 'Listenanzeige', to: '/listview' },

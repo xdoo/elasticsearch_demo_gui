@@ -45,6 +45,10 @@ export default {
     },
     data () {
       return {
+        bottom: false,
+        from: 0,
+        size: 9,
+        totalSize: 0,
         hits: []
       }
     },
@@ -57,7 +61,20 @@ export default {
      */
     watch: {
       query: function (val) {
-        this.search(val)    
+        // reset infinite scroll
+        this.bottom = false
+        this.from = 0
+        this.totalSize = 0
+        // nach oben scrollen
+        this.$vuetify.goTo(0)
+        // suchen
+        this.search(val)
+      },
+      bottom: function (val) {
+        if (this.bottomVisible()) {
+          this.from = this.from + this.size
+          this.search(this.query)
+        }
       }
     },
     /**
@@ -65,6 +82,11 @@ export default {
      * muss die Suche initial nochmal ausgeführt werden.
      */
     created: function () {
+      // Vorbereitung für infinite scroll
+      window.addEventListener('scroll', () => {
+        this.bottom = this.bottomVisible()
+      })
+      // initiale Suche ausführen
       this.search(this.query)
     },
     methods: {
@@ -80,8 +102,8 @@ export default {
           this.$search.search({
             index: 'cases',
               body: {
-                from: 0,
-                size: 30,
+                from: this.from,
+                size: this.size,
                 query: {
                 query_string: {
                   query: query,
@@ -92,9 +114,25 @@ export default {
             }
             })
             .then(result => {
-              this.hits = result.hits.hits
+              this.totalSize = result.hits.total
+              if(this.from < 1 &&  !this.bottom) {
+                // initiale suche
+                this.hits = result.hits.hits
+              } else {
+                // infinite scroll
+                result.hits.hits.forEach((hit) => {
+                  this.hits.push(hit)
+                })
+              }
             })
           }
+      },
+      bottomVisible() {
+        const scrollY = window.scrollY
+        const visible = document.documentElement.clientHeight
+        const pageHeight = document.documentElement.scrollHeight
+        const bottomOfPage = visible + scrollY >= pageHeight
+        return bottomOfPage || pageHeight < visible
       }
     }
 }

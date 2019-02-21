@@ -35,7 +35,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <case-actions :case-id="hit._id"></case-actions>
+            <case-actions :case="hit"></case-actions>
           </v-card-actions>
         </v-card>
       </v-flex>

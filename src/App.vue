@@ -1,12 +1,20 @@
 <template>
  <v-app id="inspire">
     <v-navigation-drawer
-      v-model="drawerParking"
+      v-model="drawerResubmission"
       clipped
       absolute
       right
     > 
       <resubmission></resubmission>
+    </v-navigation-drawer>
+    <v-navigation-drawer
+      v-model="drawerBookmarks"
+      clipped
+      absolute
+      right
+    > 
+      <bookmarks-drawer v-on:close="drawerBookmarks = !drawerBookmarks"></bookmarks-drawer>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="drawer"
@@ -98,6 +106,9 @@
       <v-btn icon>
         <v-icon>mdi-chat-alert</v-icon>
       </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-file-import</v-icon>
+      </v-btn>
       <v-badge
         color="accent"
         left
@@ -105,13 +116,18 @@
       >
         <span slot="badge">{{ parked }}</span>
         <v-btn
-          @click.stop="drawerParking = !drawerParking" 
+          @click.stop="drawerResubmission = !drawerResubmission" 
           icon
           class="ma-0"
         >
-          <v-icon>mdi-clipboard-arrow-down</v-icon>
+          <v-icon>mdi-calendar-clock</v-icon>
         </v-btn>
       </v-badge>
+      <v-btn 
+        icon
+        @click.stop="drawerBookmarks = !drawerBookmarks">
+        <v-icon>mdi-bookmark</v-icon>
+      </v-btn>
       <v-btn icon large>
         <v-icon large>mdi-account-circle</v-icon>
       </v-btn>
@@ -134,17 +150,20 @@
 <script>
   import { mapActions } from 'vuex'
   import Resubmission from '@/components/Resubmission'
+  import BookmarksDrawer from '@/components/BookmarksDrawer'
 
   export default {
     components: {
-      Resubmission
+      Resubmission,
+      BookmarksDrawer
     },
     data: () => ({
       query: '',
       parked: 2,
       dialog: false,
       drawer: null,
-      drawerParking: false,
+      drawerResubmission: false,
+      drawerBookmarks: false,
       items: [
         { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
         { icon: 'mdi-table-search', text: 'Textanzeige', to: '/listview' },

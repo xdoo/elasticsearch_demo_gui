@@ -15,7 +15,7 @@
               {{hit._source.address.sublocality}}<br>
               {{hit._source.address.postalCode}} {{hit._source.address.city}}<br>
             </span>
-            <v-spacer></v-spacer><case-actions :case-id="hit._id"></case-actions>
+            <v-spacer></v-spacer><case-actions :case="hit"></case-actions>
           </div>
         </l-popup>
       </l-marker>

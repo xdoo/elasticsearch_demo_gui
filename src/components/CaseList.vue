@@ -21,7 +21,7 @@
                 </v-flex>
                 <v-flex xs2>
                   <v-spacer></v-spacer>
-                  <case-actions :case-id="hit._id"></case-actions>
+                  <case-actions :case="hit"></case-actions>
                 </v-flex>
               </v-layout>
             </v-card-title>

@@ -6,7 +6,7 @@
       absolute
       right
     > 
-      <parking-drawer></parking-drawer>
+      <resubmission></resubmission>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="drawer"
@@ -109,7 +109,7 @@
           icon
           class="ma-0"
         >
-          <v-icon>mdi-timelapse</v-icon>
+          <v-icon>mdi-clipboard-arrow-down</v-icon>
         </v-btn>
       </v-badge>
       <v-btn icon large>
@@ -133,11 +133,11 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import ParkingDrawer from '@/components/ParkingDrawer'
+  import Resubmission from '@/components/Resubmission'
 
   export default {
     components: {
-      ParkingDrawer
+      Resubmission
     },
     data: () => ({
       query: '',

@@ -2,7 +2,7 @@
       <v-layout row wrap>
         <v-flex xs12>
           <div class="pt-5 mt-5 ml-3">
-            <span class="display-1 font-weight-light">Fälle in Bearbeitung</span>
+            <span class="display-1 font-weight-light">Wiedervorlage</span>
           </div>
         </v-flex>
         <v-flex xs12>

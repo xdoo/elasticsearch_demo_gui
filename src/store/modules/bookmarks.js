@@ -9,16 +9,21 @@ const getters = {
   },
   getBookmarks: (state) => {
     return state.bookmarks
+  },
+  countedBookmarks: (state) => {
+    return state.countBookmarks
   }
 }
 
 const mutations = {
   addBookmark (state, payload) {
     state.bookmarks.set(payload._id, payload)
+    state.countBookmarks++
     console.log('bookmarks: ' + state.bookmarks.size)
   },
   removeBookmark (state, payload) {
     state.bookmarks.delete(payload._id)
+    state.countBookmarks--
   }
 }
 

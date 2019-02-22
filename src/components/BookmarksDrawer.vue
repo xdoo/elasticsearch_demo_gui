@@ -10,7 +10,7 @@
           <v-list dense three-line class="pt-2">
             <v-list-tile 
               avatar
-              v-for="hit of getBookmarks.values()"
+              v-for="hit of bookmarks"
               v-bind:key="hit._id"
               @click="open(hit)">
               <v-list-tile-content>
@@ -26,12 +26,17 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      bookmarks: null
+    }
+  },
   computed: {
-    ...mapGetters(['getBookmarks'])
+    ...mapGetters(['getBookmarks', 'countedBookmarks'])
   },
   watch: {
-    getBookmarks: function(val) {
-      console.log('new bookmark -> ' + val + ' -> ' + this.getBookmarks.size)
+    countedBookmarks: function(val) {
+      this.bookmarks = this.getBookmarks.values()
     }
   },
   methods: {

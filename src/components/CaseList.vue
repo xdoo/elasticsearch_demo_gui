@@ -125,6 +125,8 @@ export default {
                 })
               }
             })
+          } else {
+            this.hits = []
           }
       },
       bottomVisible() {

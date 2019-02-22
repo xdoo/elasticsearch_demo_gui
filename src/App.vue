@@ -96,6 +96,7 @@
         solo-inverted
         hide-details
         @keyup="keymonitor"
+        @click:clear="clear()"
         clearable
         v-model="query"
         prepend-inner-icon="search"
@@ -177,6 +178,9 @@
       ...mapActions(['pushquery']),
       keymonitor () {
         this.pushquery(this.query)
+      },
+      clear () {
+        this.pushquery('')
       },
       open () {
         console.log('pressed open...')

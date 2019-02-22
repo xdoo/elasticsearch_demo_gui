@@ -27,7 +27,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat @click="dialog = false">
+            <v-btn flat @click="bookmarkDialog = false">
               abbrechen
               <v-icon right dark>mdi-close</v-icon>
             </v-btn>
@@ -64,7 +64,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat @click="dialog = false">
+            <v-btn flat @click="shareDialog = false">
               abbrechen
               <v-icon right dark>mdi-close</v-icon>
             </v-btn>

@@ -6,7 +6,7 @@
       >
         <v-icon>mdi-folder-open</v-icon>
       </v-btn>
-      <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-dialog v-model="bookmarkDialog" persistent max-width="600px">
         <v-btn 
           icon
           slot="activator"
@@ -38,6 +38,43 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-dialog v-model="shareDialog" persistent max-width="600px">
+        <v-btn 
+          icon
+          slot="activator"
+        >
+          <v-icon>mdi-share-variant</v-icon>
+        </v-btn>
+        <v-card>
+          <v-card-title>
+            <span class="headline">Fall weiter leiten</span>
+          </v-card-title>
+          <v-card-text>
+            <v-autocomplete
+              v-model="advisorId"
+              :items="advisors"
+              label="Sachbearbeitung"
+            ></v-autocomplete>
+            <v-textarea
+              outline
+              name="comment"
+              label="Schreiben Sie kurz, warum Sie sich diesen Fall weiter leiten wollen."
+              v-model="comment"
+            ></v-textarea>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn flat @click="dialog = false">
+              abbrechen
+              <v-icon right dark>mdi-close</v-icon>
+            </v-btn>
+            <v-btn color="primary" flat @click="shareCase()">
+              Weiter leiten
+              <v-icon right dark>mdi-share-variant</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-btn 
         icon
         @click="deleteCase()"
@@ -53,13 +90,19 @@ export default {
   data () {
     return {
       comment: '',
-      dialog: false
+      advisorId: '',
+      bookmarkDialog: false,
+      shareDialog: false,
+      advisors: []
     }
   },
   props: {
     case: {
       type: Object
     }
+  },
+  created: function () {
+    this.loadAdvisors()
   },
   methods: {
     ...mapActions(['addBookmark']),
@@ -68,13 +111,39 @@ export default {
     },
     bookmarkCase () {
       console.log('bookmark: ' + this.case._id)
-      this.dialog = false
+      this.bookmarkDialog = false
       this.case.comment = this.comment
       this.comment=''
       this.addBookmark(this.case)
     },
+    shareCase () {
+      console.log('share: ' + this.case._id)
+      this.shareDialog = false
+      this.case.comment = this.comment
+      this.case.advisorId = this.advisorId
+      // an das Backend senden...
+      console.log(this.case)
+    },
     deleteCase () {
       console.log('delete: ' + this.case._id)
+    },
+    loadAdvisors () {
+      this.$search.search({
+        index: 'advisors',
+        body: {
+          query: {
+            match_all: {}
+          }
+        }
+      })
+      .then(result => {
+        result.hits.hits.forEach((hit) => {
+          let advisor = {}
+          advisor.value = hit._id
+          advisor.text = hit._source.firstname + ' ' + hit._source.lastname + ' (' + hit._source.shorthandSymbol + ')'
+          this.advisors.push(advisor)
+        })
+      })
     }
   }
 }

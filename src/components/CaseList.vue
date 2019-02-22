@@ -11,7 +11,7 @@
           >
             <v-card-title primary-title>
               <v-layout>
-                <v-flex xs10>
+                <v-flex xs9>
                   <div>
                     <div class="title">{{hit._source.owner.firstname}} {{hit._source.owner.lastname}} <span class="font-weight-light">(Sachbearbeiter: {{hit._source.advisor.shorthandSymbol}})</span></div>
                     <div>
@@ -19,7 +19,7 @@
                     </div>
                   </div>
                 </v-flex>
-                <v-flex xs2>
+                <v-flex xs3>
                   <v-spacer></v-spacer>
                   <case-actions :case="hit"></case-actions>
                 </v-flex>

@@ -5,7 +5,8 @@
       <l-marker
         v-for="hit in hits"
         v-bind:key="hit._id"
-        :lat-lng="formatLatLng(hit)">
+        :lat-lng="formatLatLng(hit)"
+        style="width: 120px">
         <l-popup>
           <div>
             <span class="subheading">{{hit._source.owner.firstname}} {{hit._source.owner.lastname}} ({{hit._source.advisor.shorthandSymbol}})</span>

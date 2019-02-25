@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
 Vue.prototype.$search = new es.Client({
-  host: 'localhost:9200',
+  host: 'https://h8amddgsal:utz1kuxw98@lhm-search-demo-4880040604.eu-west-1.bonsaisearch.net',
   log: 'error'
 })
 

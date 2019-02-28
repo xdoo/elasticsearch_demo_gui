@@ -13,10 +13,15 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 
-Vue.prototype.$search = new es.Client({
-  host: 'https://h8amddgsal:utz1kuxw98@lhm-search-demo-4880040604.eu-west-1.bonsaisearch.net',
-  log: 'error'
-})
+axios
+  .get('http://localhost:8080/session/elasticsearch')
+  .then(response => {
+    console.log('host -> ' + response.data.host)
+    Vue.prototype.$search = new es.Client({
+      host: response.data.host,
+      log: 'error'
+    })
+  })
 
 Vue.component('l-map', LMap)
 Vue.component('l-tile-layer', LTileLayer)

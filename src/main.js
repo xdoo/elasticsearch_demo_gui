@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import es from 'elasticsearch'
-import axios from 'axios'
+import Axios from 'axios'
 import './plugins/vuetify'
 import { L, LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import App from './App.vue'
@@ -11,17 +11,15 @@ import '@mdi/font/css/materialdesignicons.min.css'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$http = axios
+Vue.prototype.$http = Axios.create({
+  baseURL: process.env.API_URL,
+  timeout: 30000
+})
 
-axios
-  .get('http://localhost:8081/session/elasticsearch')
-  .then(response => {
-    console.log('host -> ' + response.data.host)
-    Vue.prototype.$search = new es.Client({
-      host: response.data.host,
-      log: 'error'
-    })
-  })
+Vue.prototype.$search = new es.Client({
+  host: process.env.ES_HOST,
+  log: 'error'
+})
 
 Vue.component('l-map', LMap)
 Vue.component('l-tile-layer', LTileLayer)

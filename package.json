@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@mdi/font": "^3.4.93",
-    "express": "^4.16.4",
     "axios": "^0.18.0",
     "elasticsearch": "^15.4.1",
+    "express": "^4.16.4",
     "leaflet": "^1.4.0",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",

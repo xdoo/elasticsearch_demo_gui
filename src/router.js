@@ -7,6 +7,7 @@ const routerOptions = [
   { path: '/', component: 'MapView' },
   { path: '/dashboard', component: 'Dashboard' },
   { path: '/listview', component: 'TextView' },
+  { path: '/serversearchview', component: 'ServerSearchView' }
 ]
 
 const routes = routerOptions.map(route => {

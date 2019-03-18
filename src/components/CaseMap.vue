@@ -66,7 +66,7 @@ export default {
           index: 'cases',
           body: {
             from: 0,
-            size: 30,
+            size: 20,
             query: {
               query_string: {
                 query: query,

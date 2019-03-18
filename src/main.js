@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
 axios
-  .get('http://localhost:8080/session/elasticsearch')
+  .get('http://localhost:8081/session/elasticsearch')
   .then(response => {
     console.log('host -> ' + response.data.host)
     Vue.prototype.$search = new es.Client({

@@ -1,13 +1,18 @@
 <template>
-  <simple-case-list :hits="hits"></simple-case-list>
+  <div>
+    <simple-case-list :hits="hits"></simple-case-list>
+    <add-case-button></add-case-button>
+  </div>
 </template>
 <script>
 import SimpleCaseList from '@/components/SimpleCaseList'
+import AddCaseButton from '@/components/AddCaseButton'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    SimpleCaseList
+    SimpleCaseList,
+    AddCaseButton
   },
   data () {
     return {

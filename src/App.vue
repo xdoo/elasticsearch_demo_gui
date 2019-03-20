@@ -1,6 +1,14 @@
 <template>
  <v-app id="inspire">
     <v-navigation-drawer
+      v-model="drawerUser"
+      clipped
+      absolute
+      right
+    > 
+      <users-drawer></users-drawer>
+    </v-navigation-drawer>
+    <v-navigation-drawer
       v-model="drawerResubmission"
       clipped
       absolute
@@ -92,6 +100,7 @@
         <span class="hidden-sm-and-down">Search <span class="font-weight-light">Demo</span></span>
       </v-toolbar-title>
       <v-text-field
+        v-if="getQueryType === 'instant'"
         flat
         solo-inverted
         hide-details
@@ -129,8 +138,20 @@
         @click.stop="drawerBookmarks = !drawerBookmarks">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
-      <v-btn icon large>
-        <v-icon large>mdi-account-circle</v-icon>
+      <v-btn 
+        icon 
+        large
+        @click.stop="drawerUser = !drawerUser"  
+      >
+        <v-avatar
+          size="36px"
+        >
+        <img
+          src="@/assets/altmeier_face.jpg"
+          alt="Avatar"
+        >
+        </v-avatar>
+        <!--<v-icon large>mdi-account-circle</v-icon>-->
       </v-btn>
     </v-toolbar>
     <!--
@@ -149,14 +170,16 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import Resubmission from '@/components/Resubmission'
   import BookmarksDrawer from '@/components/BookmarksDrawer'
+  import UsersDrawer from '@/components/UsersDrawer'
 
   export default {
     components: {
       Resubmission,
-      BookmarksDrawer
+      BookmarksDrawer,
+      UsersDrawer
     },
     data: () => ({
       query: '',
@@ -165,6 +188,7 @@
       drawer: null,
       drawerResubmission: false,
       drawerBookmarks: false,
+      drawerUser: false,
       items: [
         { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
         { icon: 'mdi-table-search', text: 'Textanzeige', to: '/listview' },
@@ -174,6 +198,9 @@
     }),
     props: {
       source: String
+    },
+    computed: {
+      ...mapGetters(['getQueryType'])
     },
     methods: {
       ...mapActions(['pushquery']),

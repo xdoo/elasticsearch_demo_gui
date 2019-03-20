@@ -1,6 +1,11 @@
 <template>
   <div style="height: 100%; width: 100%; margin: 0">
-    <l-map :zoom="zoom" :center="center" style="z-index: 1">
+    <l-map 
+      :zoom="zoom" 
+      :center="center" 
+      style="z-index: 1"
+      v-on:update:center="showCenter($event)"
+      v-on:update:zoom="showZoom($event)">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-marker
         v-for="hit in hits"
@@ -45,6 +50,12 @@ export default {
     ...mapGetters(['query'])
   },
   methods: {
+    showCenter (event) {
+      console.log('moved -> ' + event)
+    },
+    showZoom (event) {
+      console.log('zoomed -> ' + event)
+    },
     /**
      * 'lon' ist der Standard Elasticsearch Wert. Dieser
      * führt zu Fehlermeldungen. Deshalb wird die Elasticsearch

@@ -113,6 +113,7 @@
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-autocomplete
+        v-if="getQueryType === 'autocomplete'"
         flat
         solo-inverted
         hide-details

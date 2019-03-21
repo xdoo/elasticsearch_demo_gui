@@ -104,14 +104,28 @@
         flat
         solo-inverted
         hide-details
-        @keyup="keymonitor"
+        @keyup="searchnow"
         @click:clear="clear()"
         clearable
         v-model="query"
         prepend-inner-icon="search"
-        label="Search"
+        label="Suche"
         class="hidden-sm-and-down"
       ></v-text-field>
+      <v-autocomplete
+        flat
+        solo-inverted
+        hide-details
+        :search-input.sync="search"
+        @keyup.enter="searchnow"
+        :items="suggests"
+        clearable
+        v-model="query"
+        prepend-inner-icon="search"
+        label="Suche"
+        no-filter
+        class="hidden-sm-and-down"
+      ></v-autocomplete>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-chat-alert</v-icon>
@@ -183,6 +197,8 @@
     },
     data: () => ({
       query: '',
+      suggests: [],
+      search: null,
       parked: 2,
       dialog: false,
       drawer: null,
@@ -202,9 +218,20 @@
     computed: {
       ...mapGetters(['getQueryType'])
     },
+    watch: {
+      search (val) {
+        console.log('searching... ' + val)
+
+        this.$http
+        .get('http://localhost:8081/case/search/suggest/' + val)
+        .then(response => {
+          this.suggests = response.data
+        })
+      }
+    },
     methods: {
       ...mapActions(['pushquery']),
-      keymonitor () {
+      searchnow () {
         this.pushquery(this.query)
       },
       clear () {

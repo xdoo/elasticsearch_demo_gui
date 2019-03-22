@@ -224,7 +224,7 @@
         console.log('searching... ' + val)
 
         this.$http
-        .get('http://localhost:8081/case/search/suggest/' + val)
+        .get('/case/search/suggest/' + val)
         .then(response => {
           this.suggests = response.data
         })

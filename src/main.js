@@ -11,13 +11,16 @@ import '@mdi/font/css/materialdesignicons.min.css'
 
 Vue.config.productionTip = false
 
+console.log('API base url: ' + process.env.VUE_APP_API_URL)
+
 Vue.prototype.$http = Axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.VUE_APP_API_URL,
   timeout: 30000
 })
 
+console.log('search url: ' + process.env.VUE_APP_ES_HOST)
 Vue.prototype.$search = new es.Client({
-  host: process.env.ES_HOST,
+  host: process.env.VUE_APP_ES_HOST,
   log: 'error'
 })
 

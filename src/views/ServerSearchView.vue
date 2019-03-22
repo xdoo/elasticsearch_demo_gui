@@ -63,7 +63,7 @@ export default {
       let query = this.query
       if(query.length > 1) {
         this.$http
-          .get('http://localhost:8081/case/search/'+ query + '/' + this.page)
+          .get('/case/search/'+ query + '/' + this.page)
           .then(response => {
             if (this.page === 0 && !this.bottom){
               // initiale Suche

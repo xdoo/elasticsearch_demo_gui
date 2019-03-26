@@ -24,6 +24,11 @@
             ></v-radio>
           </v-radio-group>
         </v-flex>
+
+        <v-flex xs12 class="ma-3">
+          <p class="subheading font-weight-light">Umgebung</p>
+          <p><v-icon v-if="!server" color="red" small>mdi-server-network-off</v-icon><v-icon v-if="server" color="green" small>mdi-server-network</v-icon> Backend Status</p>
+        </v-flex>
       </v-layout>    
 </template>
 <script>
@@ -34,6 +39,9 @@ export default {
     return {
       foo: ''
     }
+  },
+  props: {
+    server: false
   },
   computed: {
     ...mapGetters(['getQueryType']),

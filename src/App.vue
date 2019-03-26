@@ -6,7 +6,7 @@
       absolute
       right
     > 
-      <users-drawer></users-drawer>
+      <users-drawer :server="backend"></users-drawer>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="drawerResubmission"
@@ -199,6 +199,7 @@
     data: () => ({
       query: '',
       suggests: [],
+      backend: false,
       search: null,
       parked: 2,
       dialog: false,
@@ -244,7 +245,20 @@
       closeR () {
         this.drawerR = !this.drawerR
         this.parked = 0
+      },
+      ping () {
+        this.$http
+        .get('/session/ping')
+        .then(response => {
+          if(response.data) {
+            this.backend = true
+          }
+        })
       }
+    },
+    created () {
+      // das ist um Heroku aufzuwecken und wach zu halten
+      setInterval(this.ping(), 30000)
     }
   }
 </script>

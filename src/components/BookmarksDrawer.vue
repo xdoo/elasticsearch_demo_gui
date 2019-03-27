@@ -10,7 +10,7 @@
           <v-list dense three-line class="pt-2">
             <v-list-tile 
               avatar
-              v-for="bookmark of bookmarks"
+              v-for="bookmark of getBookmarks"
               v-bind:key="bookmark.id"
               @click="open(hit)">
               <v-list-tile-content>
@@ -23,7 +23,7 @@
       </v-layout>    
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -40,6 +40,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loadBookmarks']),
     open (hit) {
       console.log('open ' + hit._id)
       this.$emit('close')
@@ -47,7 +48,7 @@ export default {
   },
   created () {
     // bookmarks laden
-    
+    this.$loadBookmarks()
   } 
 }
 </script>

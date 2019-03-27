@@ -115,6 +115,7 @@ export default {
       this.case.comment = this.comment
       this.comment=''
       this.addBookmark(this.case)
+      this.$saveBookmark(this.case._id)
     },
     shareCase () {
       console.log('share: ' + this.case._id)

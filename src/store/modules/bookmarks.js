@@ -34,25 +34,13 @@ const mutations = {
 
 const actions = {
   addBookmark ({commit}, payload) {
-    this.$http
-    .put('/case/bookmark/'+payload.id+'/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF')
-    .then(response => {
-      commit('addBookmark', payload)
-    })
+    commit('addBookmark', payload)
   },
   removeBookmark ({commit}, payload) {
-    this.$http
-    .delete('/case/bookmark/'+payload.id+'/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF')
-    .then(response => {
-      commit('removeBookmark', payload)
-    })
+    commit('removeBookmark', payload)
   },
-  loadBookmarks ({commit}) {
-    this.$http
-    .get('/case/bookmark/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF/0')
-    .then(response => {
-      commit('addBookmarks', response.data.content)
-    })
+  loadBookmarks ({commit}, payload) {
+    commit('addBookmarks', payload)
   }
 }
 

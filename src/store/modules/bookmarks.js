@@ -17,13 +17,18 @@ const getters = {
 
 const mutations = {
   addBookmark (state, payload) {
-    state.bookmarks.set(payload._id, payload)
+    state.bookmarks.set(payload.id, payload)
     state.countBookmarks++
-    console.log('bookmarks: ' + state.bookmarks.size)
   },
   removeBookmark (state, payload) {
-    state.bookmarks.delete(payload._id)
+    state.bookmarks.delete(payload.id)
     state.countBookmarks--
+  },
+  addBookmarks (state, payload) {
+    payload.forEach(element => {
+      state.bookmarks.set(element.id, element)
+      state.countBookmarks++
+    });
   }
 }
 
@@ -33,6 +38,9 @@ const actions = {
   },
   removeBookmark ({commit}, payload) {
     commit('removeBookmark', payload)
+  },
+  addBookmarks ({commit}, payload) {
+    commit('addBookmarks', payload)
   }
 }
 

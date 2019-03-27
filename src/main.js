@@ -2,6 +2,7 @@ import Vue from 'vue'
 import es from 'elasticsearch'
 import Axios from 'axios'
 import './plugins/vuetify'
+import bookmarks from './plugins/bookmarks'
 import { L, LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import App from './App.vue'
 import router from './router'
@@ -36,6 +37,10 @@ L.Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
+
+Vue.use(bookmarks, {
+  http: Vue.prototype.$http
+})
 
 new Vue({
   router,

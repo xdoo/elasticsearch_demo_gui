@@ -10,12 +10,12 @@
           <v-list dense three-line class="pt-2">
             <v-list-tile 
               avatar
-              v-for="hit of bookmarks"
-              v-bind:key="hit._id"
+              v-for="bookmark of bookmarks"
+              v-bind:key="bookmark._id"
               @click="open(hit)">
               <v-list-tile-content>
-                <v-list-tile-title>{{hit._source.owner.firstname}} {{hit._source.owner.lastname}} <span class="font-weight-light">({{hit._source.advisor.shorthandSymbol}})</span></v-list-tile-title>
-                <v-list-tile-sub-title><span class="font-italic font-weight-medium">{{hit.comment}} // </span> {{hit._source.address.street}} {{hit._source.address.streetNumber}}, {{hit._source.address.postalCode}} {{hit._source.address.city}} {{hit._source.address.sublocality}}</v-list-tile-sub-title>
+                <v-list-tile-title>{{bookmark.owner.firstname}} {{bookmark.owner.lastname}} <span class="font-weight-light">({{bookmark.advisor.shorthandSymbol}})</span></v-list-tile-title>
+                <v-list-tile-sub-title>{{bookmark.address.street}} {{bookmark.address.streetNumber}}, {{bookmark.address.postalCode}} {{bookmark.address.city}} {{bookmark.address.sublocality}}</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -23,7 +23,7 @@
       </v-layout>    
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getBookmarks', 'countedBookmarks'])
+    ...mapGetters(['getBookmarks', 'countedBookmarks', 'getAdvisorId'])
   },
   watch: {
     countedBookmarks: function(val) {
@@ -40,10 +40,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addBookmarks']),
     open (hit) {
       console.log('open ' + hit._id)
       this.$emit('close')
     }
+  },
+  created () {
+    // bookmarks laden
+    this.bookmarks = this.$loadBookmarks(this.addBookmarks, this.getAdvisorId)
   } 
 }
 </script>

@@ -10,8 +10,8 @@
           <v-list dense three-line class="pt-2">
             <v-list-tile 
               avatar
-              v-for="bookmark of getBookmarks"
-              v-bind:key="bookmark.id"
+              v-for="bookmark of bookmarks"
+              v-bind:key="bookmark._id"
               @click="open(hit)">
               <v-list-tile-content>
                 <v-list-tile-title>{{bookmark.owner.firstname}} {{bookmark.owner.lastname}} <span class="font-weight-light">({{bookmark.advisor.shorthandSymbol}})</span></v-list-tile-title>
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadBookmarks']),
+    ...mapActions(['addBookmarks']),
     open (hit) {
       console.log('open ' + hit._id)
       this.$emit('close')
@@ -48,7 +48,8 @@ export default {
   },
   created () {
     // bookmarks laden
-    this.$loadBookmarks()
+    this.bookmarks = this.$loadBookmarks(this.addBookmarks)
+    console.log(JSON.stringify(this.bookmarks))
   } 
 }
 </script>

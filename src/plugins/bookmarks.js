@@ -7,13 +7,12 @@ export default {
         // get axios
         const http = options.http
 
-        Vue.prototype.$loadBookmarks = function () {
+        Vue.prototype.$loadBookmarks = function (addBookmarks) {
             console.log('loading...')
             http
             .get('/case/bookmark/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF/0')
             .then(response => {
-                console.log('loaded bookmarks.')
-                return response.data.content
+                addBookmarks(response.data.content)
             })
         }
 

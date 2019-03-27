@@ -7,21 +7,21 @@ export default {
         // get axios
         const http = options.http
 
-        Vue.prototype.$loadBookmarks = function (addBookmarks) {
+        Vue.prototype.$loadBookmarks = function (addBookmarks, advisorId) {
             console.log('loading...')
             http
-            .get('/case/bookmark/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF/0')
+            .get('/case/bookmark/'+advisorId+'/0')
             .then(response => {
                 addBookmarks(response.data.content)
             })
         }
 
-        Vue.prototype.$saveBookmark = function (id) {
+        Vue.prototype.$saveBookmark = function (caseId, advisorId) {
             console.log('save...')
             http
-            .put('/case/bookmark/'+id+'/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF')
+            .put('/case/bookmark/'+caseId+'/'+advisorId)
             .then(response => {
-                console.log('saved bookmark with id ' + id)
+                console.log('saved bookmark with id ' + caseId)
             })
         }
     

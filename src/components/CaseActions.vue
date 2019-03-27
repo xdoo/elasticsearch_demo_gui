@@ -84,7 +84,7 @@
   </div>   
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -104,18 +104,21 @@ export default {
   created: function () {
     this.loadAdvisors()
   },
+  computed: {
+    ...mapGetters(['getAdvisorId'])
+  },
   methods: {
     ...mapActions(['addBookmark']),
     openCase () {
       console.log('open: ' + this.case._id)
     },
     bookmarkCase () {
-      console.log('bookmark: ' + this.case._id)
+      console.log('bookmark: ' + this.case.id)
       this.bookmarkDialog = false
       this.case.comment = this.comment
       this.comment=''
       this.addBookmark(this.case)
-      this.$saveBookmark(this.case._id)
+      this.$saveBookmark(this.case.id, this.getAdvisorId)
     },
     shareCase () {
       console.log('share: ' + this.case._id)

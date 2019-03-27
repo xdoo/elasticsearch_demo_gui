@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getBookmarks', 'countedBookmarks'])
+    ...mapGetters(['getBookmarks', 'countedBookmarks', 'getAdvisorId'])
   },
   watch: {
     countedBookmarks: function(val) {
@@ -48,7 +48,7 @@ export default {
   },
   created () {
     // bookmarks laden
-    this.bookmarks = this.$loadBookmarks(this.addBookmarks)
+    this.bookmarks = this.$loadBookmarks(this.addBookmarks, this.getAdvisorId)
   } 
 }
 </script>

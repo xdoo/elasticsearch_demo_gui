@@ -19,7 +19,6 @@ const mutations = {
   addBookmark (state, payload) {
     state.bookmarks.set(payload.id, payload)
     state.countBookmarks++
-    console.log('bookmarks: ' + state.bookmarks.size)
   },
   removeBookmark (state, payload) {
     state.bookmarks.delete(payload.id)
@@ -28,6 +27,7 @@ const mutations = {
   addBookmarks (state, payload) {
     payload.forEach(element => {
       state.bookmarks.set(element.id, element)
+      state.countBookmarks++
     });
   }
 }
@@ -40,7 +40,6 @@ const actions = {
     commit('removeBookmark', payload)
   },
   addBookmarks ({commit}, payload) {
-    console.log('loaded bookmarks: ' + JSON.stringify(payload))
     commit('addBookmarks', payload)
   }
 }

@@ -49,7 +49,6 @@ export default {
   created () {
     // bookmarks laden
     this.bookmarks = this.$loadBookmarks(this.addBookmarks)
-    console.log(JSON.stringify(this.bookmarks))
   } 
 }
 </script>

@@ -38,9 +38,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-Vue.use(bookmarks, {
-  http: Vue.prototype.$http
-})
+Vue.use(bookmarks)
 
 new Vue({
   router,

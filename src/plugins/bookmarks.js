@@ -1,11 +1,10 @@
-import { loadavg } from "os";
 
 export default {
 
-    install (Vue, options) {
+    install (Vue) {
         console.log('installing bookmark')
         // get axios
-        const http = options.http
+        const http = Vue.prototype.$http
 
         Vue.prototype.$loadBookmarks = function (addBookmarks, advisorId) {
             console.log('loading...')

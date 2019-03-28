@@ -6,12 +6,12 @@ export default {
         // get axios
         const http = Vue.prototype.$http
 
-        Vue.prototype.$loadBookmarks = function (addBookmarks, advisorId) {
+        Vue.prototype.$loadBookmarks = function (addToVuex, advisorId) {
             console.log('loading...')
             http
             .get('/case/bookmark/'+advisorId+'/0')
             .then(response => {
-                addBookmarks(response.data.content)
+                addToVuex(response.data.content)
             })
         }
 
@@ -24,12 +24,13 @@ export default {
             })
         }
     
-        Vue.prototype.$deleteBookmark = function (id) {
+        Vue.prototype.$deleteBookmark = function (caseId, advisorId, deleteFromVuex) {
             console.log('delete')
             http
-            .delete('/case/bookmark/'+id+'/7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF')
+            .delete('/case/bookmark/'+caseId+'/'+advisorId)
             .then(response => {
-                console.log('deleted bookmark with id ' + id)
+                deleteFromVuex(caseId)
+                console.log('deleted bookmark with id ' + caseId)
             })
         }
 

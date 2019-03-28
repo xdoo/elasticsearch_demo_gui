@@ -8,16 +8,45 @@
 
         <v-flex xs12>
           <v-list dense three-line class="pt-2">
-            <v-list-tile 
-              avatar
+            <v-hover
               v-for="bookmark of bookmarks"
               v-bind:key="bookmark._id"
-              @click="open(hit)">
-              <v-list-tile-content>
-                <v-list-tile-title>{{bookmark.owner.firstname}} {{bookmark.owner.lastname}} <span class="font-weight-light">({{bookmark.advisor.shorthandSymbol}})</span></v-list-tile-title>
-                <v-list-tile-sub-title>{{bookmark.address.street}} {{bookmark.address.streetNumber}}, {{bookmark.address.postalCode}} {{bookmark.address.city}} {{bookmark.address.sublocality}}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+              @click="open(hit)"  
+            >
+              <v-list-tile
+                slot-scope="{ hover }"
+              >
+                <v-list-tile-content
+                  v-if="!hover"
+                >
+                  <v-list-tile-title>{{bookmark.owner.firstname}} {{bookmark.owner.lastname}} <span class="font-weight-light">({{bookmark.advisor.shorthandSymbol}})</span></v-list-tile-title>
+                  <v-list-tile-sub-title>{{bookmark.address.street}} {{bookmark.address.streetNumber}}, {{bookmark.address.postalCode}} {{bookmark.address.city}} {{bookmark.address.sublocality}}</v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-expand-transition>
+                  <v-toolbar
+                    floating
+                    flat
+                    prominent
+                    v-if="hover"
+                    class="white"
+                  >
+                    <v-btn 
+                      icon
+                      @click="open(bookmark)"
+                    >
+                      <v-icon>mdi-folder-open</v-icon>
+                    </v-btn>
+                    <v-btn 
+                      icon
+                      @click="remove(bookmark)"
+                    >
+                      <v-icon>mdi-bookmark-minus</v-icon>
+                    </v-btn>
+                    
+                  </v-toolbar>
+                </v-expand-transition>
+              </v-list-tile>
+            </v-hover>
           </v-list>
         </v-flex>
       </v-layout>    
@@ -40,9 +69,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addBookmarks']),
+    ...mapActions(['addBookmarks', 'removeBookmark']),
     open (hit) {
-      console.log('open ' + hit._id)
+      console.log('open ' + hit.id)
+      this.$emit('close')
+    },
+    remove (hit) {
+      console.log('delete ' + hit.id)
+      this.$deleteBookmark(hit.id, this.getAdvisorId, this.removeBookmark)
       this.$emit('close')
     }
   },

@@ -21,7 +21,7 @@ const mutations = {
     state.countBookmarks++
   },
   removeBookmark (state, payload) {
-    state.bookmarks.delete(payload.id)
+    state.bookmarks.delete(payload)
     state.countBookmarks--
   },
   addBookmarks (state, payload) {

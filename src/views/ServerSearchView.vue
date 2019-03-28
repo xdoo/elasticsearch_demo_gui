@@ -1,17 +1,44 @@
 <template>
   <div>
-    <simple-case-list :hits="hits"></simple-case-list>
+    <v-toolbar
+      flat
+      color="transparent"
+    >
+      <v-spacer></v-spacer>
+      <v-btn 
+        icon
+        @click="showCards()"  
+      >
+        <v-icon color="primary">mdi-apps</v-icon>
+      </v-btn>
+      <v-btn 
+        icon
+        @click="showList()"
+      >
+        <v-icon color="primary">mdi-view-list</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <simple-case-list
+      v-if="view === 'list'" 
+      :hits="hits"
+    ></simple-case-list>
+    <simple-card-list
+      v-if="view === 'cards'" 
+      :hits="hits"
+    ></simple-card-list>
     <add-case-button></add-case-button>
   </div>
 </template>
 <script>
 import SimpleCaseList from '@/components/SimpleCaseList'
+import SimpleCardList from '@/components/SimpleCardList'
 import AddCaseButton from '@/components/AddCaseButton'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     SimpleCaseList,
+    SimpleCardList,
     AddCaseButton
   },
   data () {
@@ -19,7 +46,8 @@ export default {
       bottom: false,
       page: 0,
       totalPages: 1,
-      hits: []
+      hits: [],
+      view: 'list'
     }
   },
   computed: {
@@ -88,7 +116,13 @@ export default {
         const pageHeight = document.documentElement.scrollHeight
         const bottomOfPage = visible + scrollY >= pageHeight
         return bottomOfPage || pageHeight < visible
-      }
+    },
+    showList () {
+      this.view = 'list'
+    },
+    showCards () {
+      this.view = 'cards'
+    }
   }
 }
 </script>

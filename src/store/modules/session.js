@@ -1,5 +1,5 @@
 const state = {
-  advisorId: '7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF' 
+  advisorId: '7RWOAUUMIHYYTZGLFRJSMRGRYAX9QAYBJDF'
 }
   
 const getters = {

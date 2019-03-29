@@ -42,6 +42,7 @@
         <v-btn 
           icon
           slot="activator"
+          @click="loadAdvisors()"
         >
           <v-icon>mdi-share-variant</v-icon>
         </v-btn>
@@ -101,9 +102,6 @@ export default {
       type: Object
     }
   },
-  created: function () {
-    this.loadAdvisors()
-  },
   computed: {
     ...mapGetters(['getAdvisorId'])
   },
@@ -132,22 +130,10 @@ export default {
       console.log('delete: ' + this.case._id)
     },
     loadAdvisors () {
-      this.$search.search({
-        index: 'advisors',
-        body: {
-          query: {
-            match_all: {}
-          }
-        }
-      })
-      .then(result => {
-        result.hits.hits.forEach((hit) => {
-          let advisor = {}
-          advisor.value = hit._id
-          advisor.text = hit._source.firstname + ' ' + hit._source.lastname + ' (' + hit._source.shorthandSymbol + ')'
-          this.advisors.push(advisor)
-        })
-      })
+      this.$loadAdvisorNamesAndIds(this.setAdvisors)
+    },
+    setAdvisors(advisors) {
+      this.advisors = advisors
     }
   }
 }

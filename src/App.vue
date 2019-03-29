@@ -209,7 +209,6 @@
       drawerUser: false,
       items: [
         { icon: 'mdi-map-search', text: 'Geoanzeige', to: '/' },
-        { icon: 'mdi-table-search', text: 'Textanzeige', to: '/listview' },
         { icon: 'mdi-shield-search', text: 'Serversuche', to: '/serversearchview' },
         { icon: 'mdi-chart-donut-variant', text: 'Dashboard', to: '/dashboard' }
       ]

@@ -99,6 +99,9 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">Search <span class="font-weight-light">Demo</span></span>
       </v-toolbar-title>
+      <!-- 
+        Instant Suche
+      -->
       <v-text-field
         v-if="getQueryType === 'instant'"
         flat
@@ -112,6 +115,9 @@
         label="Suche"
         class="hidden-sm-and-down"
       ></v-text-field>
+      <!--
+        Einfacher Suggester
+      -->
       <v-autocomplete
         v-if="getQueryType === 'autocomplete'"
         flat
@@ -127,6 +133,46 @@
         no-filter
         class="hidden-sm-and-down"
       ></v-autocomplete>
+      <!--
+        Google like Suche
+      -->
+      <v-autocomplete
+        v-if="getQueryType === 'google'"
+        flat
+        solo-inverted
+        hide-details
+        :search-input.sync="search"
+        @keyup.enter="searchnow"
+        :items="suggests"
+        clearable
+        v-model="query"
+        prepend-inner-icon="search"
+        label="Suche"
+        no-filter
+        class="hidden-sm-and-down"
+      >
+        <template v-slot:no-data>
+          <v-list-tile>
+            <v-list-tile-title>
+              Geben Sie ihre <strong>Suchanfrage</strong> hier ein.
+            </v-list-tile-title>
+          </v-list-tile>
+        </template>
+        <template v-slot:item="{ item }">
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <v-icon small v-if="item.type === 'bookmark'">mdi-bookmark</v-icon>
+              <v-icon small v-if="item.type === 'search'">mdi-magnify</v-icon>
+              {{item.suggestion}}
+            </v-list-tile-title>
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-chip v-if="item.type === 'bookmark'" label color="grey" text-color="white">
+              <v-icon left @click="openBookmark(item.id)">mdi-label</v-icon>öffnen
+            </v-chip>
+          </v-list-tile-action>
+        </template>
+      </v-autocomplete>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-chat-alert</v-icon>
@@ -217,23 +263,29 @@
       source: String
     },
     computed: {
-      ...mapGetters(['getQueryType'])
+      ...mapGetters(['getQueryType', 'getAdvisorId'])
     },
     watch: {
-      search (val) {
-        console.log('searching... ' + val)
-
-        this.$http
-        .get('/case/search/suggest/' + val)
-        .then(response => {
-          this.suggests = response.data
-        })
+      search (query) {
+        console.log('searching... ' + query)
+        if(query.length > 0) {
+          if(this.getQueryType === 'autocomplete') {
+            this.$simpleSuggest(this.setSuggests, query)
+          } else if (this.getQueryType === 'google') {
+            this.$complexSuggest(this.setSuggests, query, this.getAdvisorId)
+          } else {
+            console.warn('wrong query type...')
+          }
+        }
       }
     },
     methods: {
       ...mapActions(['pushquery']),
       searchnow () {
         this.pushquery(this.query)
+      },
+      setSuggests(suggests) {
+        this.suggests = suggests
       },
       clear () {
         this.pushquery('')

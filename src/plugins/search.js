@@ -7,7 +7,23 @@ export default {
 
         Vue.prototype.$pageSearch = function (setResult, query, page) {
             this.$http
-            .get('/case/search/'+ query + '/' + page)
+            .get('/search/'+ query + '/' + page)
+            .then(response => {
+                setResult(response.data)
+            })
+        }
+
+        Vue.prototype.$simpleSuggest = function (setResult, query) {
+            this.$http
+            .get('/search/simplesuggest/'+ query)
+            .then(response => {
+                setResult(response.data)
+            })
+        }
+
+        Vue.prototype.$complexSuggest = function (setResult, query, advisorId) {
+            this.$http
+            .get('/search/complexsuggest/'+ query + '/' + advisorId)
             .then(response => {
                 setResult(response.data)
             })

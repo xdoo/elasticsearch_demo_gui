@@ -22,6 +22,10 @@
               label="Autocomplete Suche"
               value="autocomplete"
             ></v-radio>
+            <v-radio
+              label="Google like Suche"
+              value="google"
+            ></v-radio>
           </v-radio-group>
         </v-flex>
 
@@ -58,11 +62,14 @@ export default {
         if(val === 'autocomplete') {
           this.autocompleteQuery()
         }
+        if(val == 'google') {
+          this.googleQuery()
+        }
       }
     }
   },
   methods: {
-    ...mapActions(['instantQuery', 'autocompleteQuery']),
+    ...mapActions(['instantQuery', 'autocompleteQuery', 'googleQuery']),
     open (hit) {
       console.log('open ' + hit._id)
       this.$emit('close')

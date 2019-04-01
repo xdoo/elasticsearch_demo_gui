@@ -30,6 +30,9 @@ const state = {
     },
     autocompleteQuery({commit}) {
       commit('setQueryType', 'autocomplete')
+    },
+    googleQuery({commit}) {
+      commit('setQueryType', 'google')
     }
   }
   

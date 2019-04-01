@@ -90,25 +90,24 @@ export default {
     search () {
       let query = this.query
       if(query.length > 1) {
-        this.$http
-          .get('/case/search/'+ query + '/' + this.page)
-          .then(response => {
-            if (this.page === 0 && !this.bottom){
-              // initiale Suche
-              this.hits = response.data.content
-            } else {
-              // infinite scroll
-              response.data.content.forEach((hit) => {
-                this.hits.push(hit)
-              })
-            }
-            // Paging
-            this.page = response.data.pageable.pageNumber + 1
-            this.totalPages = response.data.totalPages 
-          })
+        this.$pageSearch(this.setResult, query, this.page)
       } else {
         this.hits = []
       }
+    },
+    setResult(result) {
+      if (this.page === 0 && !this.bottom){
+        // initiale Suche
+        this.hits = result.content
+      } else {
+        // infinite scroll
+        result.content.forEach((hit) => {
+          this.hits.push(hit)
+        })
+      }
+      // Paging
+      this.page = result.pageable.pageNumber + 1
+      this.totalPages = result.totalPages
     },
     bottomVisible() {
         const scrollY = window.scrollY

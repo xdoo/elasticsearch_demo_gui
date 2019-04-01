@@ -31,13 +31,13 @@ Vue.component('l-tile-layer', LTileLayer)
 Vue.component('l-marker', LMarker)
 Vue.component('l-popup', LPopup)
 
-delete L.Icon.Default.prototype._getIconUrl;
+// delete L.Icon.Default.prototype._getIconUrl;
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
+// L.Icon.Default.mergeOptions({
+//  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+//  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+//  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+// });
 
 Vue.use(bookmarks)
 Vue.use(advisors)

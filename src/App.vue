@@ -167,7 +167,7 @@
           </v-list-tile-content>
           <v-list-tile-action>
             <v-chip v-if="item.type === 'bookmark'" label color="grey" text-color="white">
-              <v-icon left @click="openBookmark(item.id)">mdi-label</v-icon>öffnen
+              <v-icon left>mdi-label</v-icon>öffnen
             </v-chip>
           </v-list-tile-action>
         </template>
@@ -291,8 +291,8 @@
       ...mapActions(['pushquery']),
       googleSearchnow (query) {
         if(query !== null) {
+          this.query = query.suggestion
           if(query.type === 'search') {
-            this.query = query.suggestion
             this.pushquery(query)
           } else if (query.type === 'bookmark') {
             // TODO implement

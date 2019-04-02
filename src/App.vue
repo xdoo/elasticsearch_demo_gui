@@ -267,20 +267,36 @@
     },
     watch: {
       search (query) {
-        console.log('searching... ' + query)
-        if(query.length > 0) {
-          if(this.getQueryType === 'autocomplete') {
-            this.$simpleSuggest(this.setSuggests, query)
-          } else if (this.getQueryType === 'google') {
-            this.$complexSuggest(this.setSuggests, query, this.getAdvisorId)
-          } else {
-            console.warn('wrong query type...')
+        if(typeof query === 'object') {
+          console.log('searching... ' + JSON.stringify(query))
+          this.googleSearch(query)
+        } else {
+          // leere Suchstrings aussortieren
+          if(query.length > 0) {
+            if(this.getQueryType === 'autocomplete') {
+              this.$simpleSuggest(this.setSuggests, query)
+            } else if (this.getQueryType === 'google') {
+              this.$complexSuggest(this.setSuggests, query, this.getAdvisorId)
+            } else {
+              console.warn('wrong query type...')
+            }
           }
         }
       }
     },
     methods: {
       ...mapActions(['pushquery']),
+      googleSearch (query) {
+        if(query !== null) {
+          if(query.type === 'search') {
+            this.query = query
+            this.searchnow()
+          } else if (query.type === 'bookmark') {
+            // TODO implement
+            console.log('open bookmark with id ' + query.id)
+          }
+        }
+      },
       searchnow () {
         this.pushquery(this.query)
       },

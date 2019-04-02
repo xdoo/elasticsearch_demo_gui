@@ -90,7 +90,7 @@ export default {
     search () {
       if(typeof this.query === 'object' && this.query !== null) {
         // Suche nach einem Completion Vorschlag
-        console.log('search view -> google search')
+        console.log('search view -> google / autocomplete search')
         let query = this.query.suggestion
         this.$pageSuggestionSearch(this.setResult, query, this.page)
       } else if (this.query !== null) {

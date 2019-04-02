@@ -124,7 +124,7 @@
         solo-inverted
         hide-details
         :search-input.sync="autocompleteSearch"
-        @keyup.enter="searchnow"
+        @keyup.enter="autocompleteSearchnow"
         :items="suggests"
         clearable
         v-model="query"
@@ -300,8 +300,9 @@
           }
         }
       },
-      googleSearchnowx (query) {
-        console.log('googleSearchnowx ' + query)
+      autocompleteSearchnow () {
+        let search = {'suggestion': this.query}
+        this.pushquery(search)
       },
       searchnow () {
         console.log('searchnow...' + JSON.stringify(this.query))

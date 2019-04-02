@@ -162,7 +162,8 @@
             <v-list-tile-title>
               <v-icon small v-if="item.type === 'bookmark'">mdi-bookmark</v-icon>
               <v-icon small v-if="item.type === 'search'">mdi-magnify</v-icon>
-              <v-icon small v-if="item.type === 'wildcard'">mdi-cards-outline</v-icon>
+              <v-icon small v-if="item.type === 'wildcard'">mdi-cards-playing-outline</v-icon>
+              <v-icon small v-if="item.type === 'timelapse'">mdi-clock-outline</v-icon>
               {{item.suggestion}}
             </v-list-tile-title>
           </v-list-tile-content>

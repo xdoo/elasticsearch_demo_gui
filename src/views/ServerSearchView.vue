@@ -51,7 +51,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['query']),
+    ...mapGetters(['query', 'getAdvisorId']),
     options () {
       return {
         duration: 620,
@@ -91,10 +91,10 @@ export default {
       if(typeof this.query === 'object' && this.query !== null) {
         console.log("search view -> " + JSON.stringify(this.query))
         let query = this.query.suggestion
-        if(this.query.type === 'search') {
+        if(this.query.type === 'search' || this.query.type === 'timelapse') {
           // Suche nach einem Completion Vorschlag
           console.log('search view -> google / autocomplete search')
-          this.$pageSuggestionSearch(this.setResult, query, this.page)
+          this.$pageSuggestionSearch(this.setResult, query, this.getAdvisorId, this.page)
         } else if (this.query.type === 'wildcard') {
           console.log('search view -> wildcard search')
           this.$pageSearch(this.setResult, query, this.page)

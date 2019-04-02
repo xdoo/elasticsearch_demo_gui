@@ -13,9 +13,9 @@ export default {
             })
         }
 
-        Vue.prototype.$pageSuggestionSearch = function (setResult, query, page) {
+        Vue.prototype.$pageSuggestionSearch = function (setResult, query, advisorId, page) {
             this.$http
-            .get('/search/suggestionterm/'+ query + '/' + page)
+            .get('/search/suggestionterm/'+ query + '/' + advisorId + '/' + page)
             .then(response => {
                 setResult(response.data)
             })

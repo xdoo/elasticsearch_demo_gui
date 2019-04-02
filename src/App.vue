@@ -123,7 +123,7 @@
         flat
         solo-inverted
         hide-details
-        :search-input.sync="search"
+        :search-input.sync="autocompleteSearch"
         @keyup.enter="searchnow"
         :items="suggests"
         clearable
@@ -141,8 +141,7 @@
         flat
         solo-inverted
         hide-details
-        :search-input.sync="search"
-        @keyup.enter="searchnow"
+        :search-input.sync="googleSearch"
         :items="suggests"
         clearable
         v-model="query"
@@ -247,6 +246,8 @@
       suggests: [],
       backend: false,
       search: null,
+      autocompleteSearch: null,
+      googleSearch: null,
       parked: 2,
       dialog: false,
       drawer: null,
@@ -266,38 +267,44 @@
       ...mapGetters(['getQueryType', 'getAdvisorId'])
     },
     watch: {
-      search (query) {
+      autocompleteSearch (query) {
+        // leere Suchstrings aussortieren
+        if(query.length > 0) {
+          this.$simpleSuggest(this.setSuggests, query)
+        }
+      },
+      googleSearch (query) {
+        // wenn der Nutzer in die Liste klickt, dann
+        // kommt ein komplexes Obekt zurück
         if(typeof query === 'object') {
-          console.log('searching... ' + JSON.stringify(query))
-          this.googleSearch(query)
+          console.log('googleSearch... ' + JSON.stringify(query))
+          this.googleSearchnow (query)
         } else {
           // leere Suchstrings aussortieren
           if(query.length > 0) {
-            if(this.getQueryType === 'autocomplete') {
-              this.$simpleSuggest(this.setSuggests, query)
-            } else if (this.getQueryType === 'google') {
-              this.$complexSuggest(this.setSuggests, query, this.getAdvisorId)
-            } else {
-              console.warn('wrong query type...')
-            }
+            this.$complexSuggest(this.setSuggests, query, this.getAdvisorId)
           }
         }
       }
     },
     methods: {
       ...mapActions(['pushquery']),
-      googleSearch (query) {
+      googleSearchnow (query) {
         if(query !== null) {
           if(query.type === 'search') {
-            this.query = query
-            this.searchnow()
+            this.query = query.suggestion
+            this.pushquery(query)
           } else if (query.type === 'bookmark') {
             // TODO implement
             console.log('open bookmark with id ' + query.id)
           }
         }
       },
+      googleSearchnowx (query) {
+        console.log('googleSearchnowx ' + query)
+      },
       searchnow () {
+        console.log('searchnow...' + JSON.stringify(this.query))
         this.pushquery(this.query)
       },
       setSuggests(suggests) {

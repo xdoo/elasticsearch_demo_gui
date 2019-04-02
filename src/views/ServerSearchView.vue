@@ -89,10 +89,16 @@ export default {
   methods: {
     search () {
       if(typeof this.query === 'object' && this.query !== null) {
-        // Suche nach einem Completion Vorschlag
-        console.log('search view -> google / autocomplete search')
+        console.log("search view -> " + JSON.stringify(this.query))
         let query = this.query.suggestion
-        this.$pageSuggestionSearch(this.setResult, query, this.page)
+        if(this.query.type === 'search') {
+          // Suche nach einem Completion Vorschlag
+          console.log('search view -> google / autocomplete search')
+          this.$pageSuggestionSearch(this.setResult, query, this.page)
+        } else if (this.query.type === 'wildcard') {
+          console.log('search view -> wildcard search')
+          this.$pageSearch(this.setResult, query, this.page)
+        }
       } else if (this.query !== null) {
         console.log('search view -> normal search')
         let query = this.query

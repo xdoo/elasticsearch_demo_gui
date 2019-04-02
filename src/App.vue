@@ -162,6 +162,7 @@
             <v-list-tile-title>
               <v-icon small v-if="item.type === 'bookmark'">mdi-bookmark</v-icon>
               <v-icon small v-if="item.type === 'search'">mdi-magnify</v-icon>
+              <v-icon small v-if="item.type === 'wildcard'">mdi-cards-outline</v-icon>
               {{item.suggestion}}
             </v-list-tile-title>
           </v-list-tile-content>
@@ -292,7 +293,7 @@
       googleSearchnow (query) {
         if(query !== null) {
           this.query = query.suggestion
-          if(query.type === 'search') {
+          if(query.type === 'search' || query.type === 'wildcard') {
             this.pushquery(query)
           } else if (query.type === 'bookmark') {
             // TODO implement
@@ -301,7 +302,7 @@
         }
       },
       autocompleteSearchnow () {
-        let search = {'suggestion': this.query}
+        let search = {'suggestion': this.query, 'type': 'search'}
         this.pushquery(search)
       },
       searchnow () {

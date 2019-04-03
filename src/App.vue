@@ -294,7 +294,7 @@
       googleSearchnow (query) {
         if(query !== null) {
           this.query = query.suggestion
-          if(query.type === 'search' || query.type === 'wildcard') {
+          if(query.type === 'search' || query.type === 'wildcard' || query.type === 'timelapse') {
             this.pushquery(query)
           } else if (query.type === 'bookmark') {
             // TODO implement

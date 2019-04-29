@@ -126,6 +126,7 @@
         :search-input.sync="autocompleteSearch"
         @keyup.enter="autocompleteSearchnow"
         :items="suggests"
+        append-icon=""
         clearable
         v-model="query"
         prepend-inner-icon="search"
@@ -143,6 +144,7 @@
         hide-details
         :search-input.sync="googleSearch"
         :items="suggests"
+        append-icon=""
         clearable
         v-model="query"
         prepend-inner-icon="search"

@@ -176,6 +176,9 @@
           </v-list-tile-action>
         </template>
       </v-autocomplete>
+      <v-btn icon>
+        <v-icon>mdi-settings</v-icon>
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-chat-alert</v-icon>

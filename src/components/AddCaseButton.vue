@@ -20,7 +20,7 @@
         small
         color="primary"
       >
-        ZE
+        AA
       </v-btn>
       <v-btn
         fab
@@ -28,7 +28,7 @@
         small
         color="primary"
       >
-        EH
+        BB
       </v-btn>
       <v-btn
         fab
@@ -36,7 +36,7 @@
         small
         color="primary"
       >
-        §5
+        CC
       </v-btn>
       <v-btn
         fab
@@ -44,7 +44,7 @@
         small
         color="primary"
       >
-        WO
+        DD
       </v-btn>
       <v-btn
         fab

@@ -29,7 +29,7 @@
       clipped
       app
     >
-
+      <filter-drawer></filter-drawer>
     </v-navigation-drawer>
     <!--
     <v-navigation-drawer
@@ -250,12 +250,14 @@
   import Resubmission from '@/components/Resubmission'
   import BookmarksDrawer from '@/components/BookmarksDrawer'
   import UsersDrawer from '@/components/UsersDrawer'
+  import FilterDrawer from '@/components/FilterDrawer'
 
   export default {
     components: {
       Resubmission,
       BookmarksDrawer,
-      UsersDrawer
+      UsersDrawer,
+      FilterDrawer
     },
     data: () => ({
       query: '',

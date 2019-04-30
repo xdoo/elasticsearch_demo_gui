@@ -24,6 +24,13 @@
     > 
       <bookmarks-drawer v-on:close="drawerBookmarks = !drawerBookmarks"></bookmarks-drawer>
     </v-navigation-drawer>
+    <v-navigation-drawer
+      v-model="drawerFilters"
+      clipped
+      app
+    >
+
+    </v-navigation-drawer>
     <!--
     <v-navigation-drawer
       v-model="drawer"
@@ -179,7 +186,7 @@
         </template>
       </v-autocomplete>
       <v-btn icon>
-        <v-icon>mdi-settings</v-icon>
+        <v-icon @click.stop="drawerFilters = !drawerFilters">mdi-settings</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -260,6 +267,7 @@
       parked: 2,
       dialog: false,
       drawer: null,
+      drawerFilters: false,
       drawerResubmission: false,
       drawerBookmarks: false,
       drawerUser: false,

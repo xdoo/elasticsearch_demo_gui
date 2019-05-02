@@ -142,7 +142,22 @@
         label="Suche"
         no-filter
         class="hidden-sm-and-down"
-      ></v-autocomplete>
+      >
+        <template v-slot:no-data>
+          <v-list-tile>
+            <v-list-tile-title>
+              Geben Sie ihre <strong>Suchanfrage</strong> hier ein.
+            </v-list-tile-title>
+          </v-list-tile>
+        </template>
+        <template v-slot:item="{ item }">
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <v-icon small>mdi-magnify</v-icon> {{item}}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </template>
+      </v-autocomplete>
       <!--
         Google like Suche
       -->

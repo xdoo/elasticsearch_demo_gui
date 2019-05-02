@@ -3,12 +3,15 @@
         <v-flex xs12>
           <div class="pt-5 mt-5 ml-3">
             <span class="display-1 font-weight-light">Such Filter</span>
-            <span class="title font-weight-light">Hier können Sie die Datenbasis für die Suche einschränken.</span>
+            <p class="subheading font-weight-light">Hier können Sie die Datenbasis für die Suche einschränken.</p>
           </div>
         </v-flex>
 
         <v-flex xs12 class="ma-3">
-          foo
+          <v-switch
+            v-model="own"
+            label="nur eigene Fälle"
+          ></v-switch>
         </v-flex>
       </v-layout>    
 </template>
@@ -18,7 +21,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      bookmarks: null
+      own: false
     }
   },
   computed: {

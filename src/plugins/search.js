@@ -7,7 +7,7 @@ export default {
 
         Vue.prototype.$pageSearch = function (setResult, query, page) {
             this.$http
-            .get('/search/'+ query + '/' + page)
+            .get('/search/'+ query + '/' + page + '//')
             .then(response => {
                 setResult(response.data)
             })

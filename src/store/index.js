@@ -5,6 +5,7 @@ import session from './modules/session'
 import search from './modules/search'
 import snackbar from './modules/snackbar'
 import bookmarks from './modules/bookmarks'
+import filters from './modules/filters'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     session,
     search,
     snackbar,
-    bookmarks
+    bookmarks,
+    filters
   }
 })

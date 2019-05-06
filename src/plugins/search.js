@@ -6,8 +6,11 @@ export default {
         const http = Vue.prototype.$http
 
         Vue.prototype.$pageSearch = function (setResult, query, page) {
+
+            let myCaseFilter = this.$store.getters.getMyCaseFilter
+
             this.$http
-            .get('/search/'+ query + '/' + page + '//')
+            .get('/search/'+ query + '/' + page + '/' + myCaseFilter)
             .then(response => {
                 setResult(response.data)
             })

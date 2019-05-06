@@ -1,38 +1,26 @@
 const state = {
-    query: '',
-    type: 'instant'
+    myCaseFilter: '_'
   }
   
   const getters = {
-    query (state) {
-      return state.query
-    },
-    getQueryType (state) {
-      return state.type
+    getMyCaseFilter (state) {
+      return state.myCaseFilter
     }
   }
   
   const mutations = {
-    setQuery (state, payload) {
-      state.query = payload
-    },
-    setQueryType (state, payload) {
-      state.type = payload
+    setMyCaseFilter (state, payload) {
+      state.myCaseFilter = payload
     }
   }
   
   const actions = {
-    pushquery ({ commit }, payload) {
-      commit('setQuery', payload)
-    },
-    instantQuery({commit}) {
-      commit('setQueryType', 'instant')
-    },
-    autocompleteQuery({commit}) {
-      commit('setQueryType', 'autocomplete')
-    },
-    googleQuery({commit}) {
-      commit('setQueryType', 'google')
+    setMyCaseFilter ({commit}, payload) {
+      if(!payload || 0 === payload.length) {
+        commit('setMyCaseFilter', '_')
+      } else {
+        commit('setMyCaseFilter', payload)
+      }
     }
   }
   

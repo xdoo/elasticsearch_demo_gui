@@ -15,12 +15,15 @@ const state = {
   }
   
   const actions = {
-    setMyCaseFilter ({commit}, payload) {
+    addMyCaseFilter ({commit}, payload) {
       if(!payload || 0 === payload.length) {
         commit('setMyCaseFilter', '_')
       } else {
         commit('setMyCaseFilter', payload)
       }
+    },
+    removeMyCaseFilter ({commit}, payload) {
+      commit('setMyCaseFilter', '_')
     }
   }
   

@@ -9,7 +9,7 @@
 
         <v-flex xs12 class="ma-3">
           <v-switch
-            v-model="own"
+            v-model="myCaseFilter"
             label="nur eigene Fälle"
           ></v-switch>
         </v-flex>
@@ -21,32 +21,33 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      own: false
+      myCaseFilter: false
     }
   },
   computed: {
-    ...mapGetters(['getBookmarks', 'countedBookmarks', 'getAdvisorId'])
+    ...mapGetters(['getAdvisorId', 'getMyCaseFilter'])
   },
   watch: {
-    countedBookmarks: function(val) {
-      this.bookmarks = this.getBookmarks.values()
+    myCaseFilter: function(val) {
+      if (val) {
+        this.addMyCaseFilter(this.getAdvisorId)
+      } else {
+        this.removeMyCaseFilter()
+      }
     }
   },
   methods: {
-    ...mapActions(['addBookmarks', 'removeBookmark']),
-    open (hit) {
-      console.log('open ' + hit.id)
-      this.$emit('close')
-    },
-    remove (hit) {
-      console.log('delete ' + hit.id)
-      this.$deleteBookmark(hit.id, this.getAdvisorId, this.removeBookmark)
-      this.$emit('close')
-    }
+    ...mapActions(['addMyCaseFilter', 'removeMyCaseFilter'])
   },
   created () {
     // bookmarks laden
-    this.bookmarks = this.$loadBookmarks(this.addBookmarks, this.getAdvisorId)
+    let mcf = this.getMyCaseFilter
+    if(mcf === '_') {
+      this.myCaseFilter = false
+    } else {
+      this.myCaseFilter = true
+    }
+    
   } 
 }
 </script>

@@ -4,9 +4,8 @@ import Router from 'vue-router'
 import NotFound from '@/views/NotFound'
 
 const routerOptions = [
-  { path: '/', component: 'MapView' },
-  { path: '/dashboard', component: 'Dashboard' },
-  { path: '/serversearchview', component: 'ServerSearchView' }
+  { path: '/', component: 'ServerSearchView' },
+  { path: '/dashboard', component: 'Dashboard' }
 ]
 
 const routes = routerOptions.map(route => {
